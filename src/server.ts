@@ -1,26 +1,21 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import userRoutes from "./routes/userRoutes"
-// const prisma = require("./lib/prisma")
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./config/swagger");
-dotenv.config();
+import express, { Request, Response } from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { connectDB } from "./config/db";
+import UserRoutes from "./routes/UserRoutes";
 
+dotenv.config()
+connectDB()
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/api/users", userRoutes)
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(cors())
+app.use("/api/users", UserRoutes);
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from Express & TypeScript Server!");
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello from Express & TypeScript Server!');
 });
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger is running on http://localhost:${PORT}/api-docs`);
 });
