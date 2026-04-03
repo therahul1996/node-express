@@ -5,18 +5,31 @@ import { createUser, deleteUser, getUser, updateUser } from "../controllers/user
 const router = Router();
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   post:
  *     summary: Post user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               age:
+ *                 type: number
  *     responses:
  *       201:
- *         description:Create user
+ *         description: Create user
  */
 router.post('/', createUser);
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     summary: Get all users
  *     responses:
@@ -27,7 +40,7 @@ router.get('/', getUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   put:
  *     summary: Update user
  *     parameters:
@@ -44,7 +57,7 @@ router.put('/:id', updateUser);
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   delete:
  *     summary: Delete users
  *     responses:
