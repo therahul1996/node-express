@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes"
-// const prisma = require("./lib/prisma")
+import chatRoutes from "./routes/chatRoutes"
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
 dotenv.config();
@@ -12,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes)
+app.use("/api/chat", chatRoutes)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT || 3000;
